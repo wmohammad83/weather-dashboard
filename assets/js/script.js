@@ -39,8 +39,6 @@ $("#search-button").on("click", function (event) {
   $("search-input").value = "";
 });
 
-
-
 // =================================================================
 // Render Buttons Array
 // =================================================================
@@ -113,7 +111,10 @@ function getWeather(city) {
     var pHumidity = $("<p>");
     var pWind = $("<p>");
     var mainImg = $("<img>");
-    mainImg.attr("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png");
+    mainImg.attr(
+      "src",
+      "https://openweathermap.org/img/wn/" + icon + "@2x.png"
+    );
     h1.text(city + " " + date);
     pTemp.text("Temp: " + temp + String.fromCharCode(176) + "C");
     pHumidity.text("Humidity: " + humidity + "%");
@@ -150,7 +151,7 @@ function getWeather(city) {
       var cardImg = $("<img>");
       cardImg.attr(
         "src",
-        "http://openweathermap.org/img/wn/" + cardIcon + "@2x.png"
+        "https://openweathermap.org/img/wn/" + cardIcon + "@2x.png"
       );
 
       // =================================================================
@@ -173,9 +174,8 @@ function getWeather(city) {
       card.append(smallCardBody);
 
       $("#forecast").append(card);
-      $("#cards").append("hello ");
     }
   });
 }
 
-renderButtons(storedCities)
+renderButtons(storedCities);
