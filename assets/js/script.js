@@ -1,4 +1,14 @@
 // =================================================================
+// Cities Array
+// =================================================================
+var storedCities = JSON.parse(localStorage.getItem("cities"));
+
+
+var cities = [];
+
+
+renderButtons(storedCities);
+// =================================================================
 // Click Function
 // =================================================================
 $("#search-button").on("click", function (event) {
@@ -11,8 +21,18 @@ $("#search-button").on("click", function (event) {
   // Get value from input and run the get weather function
   // =================================================================
   var city = $("#search-input").val();
+
+  if(city === ""){
+    return
+  }
+
   getWeather(city);
   cities.push(city);
+
+  // =================================================================
+  // Save button data to local storage
+  // =================================================================
+  localStorage.setItem("cities", JSON.stringify(cities));
 
   // =================================================================
   // Clear history and re render the buttons onto the html
@@ -20,16 +40,8 @@ $("#search-button").on("click", function (event) {
   $("#history").empty();
   renderButtons(cities);
 
-  // =================================================================
-  // Save button data to local storage
-  // =================================================================
-  localStorage.setItem("cities", JSON.stringify(cities));
+  $("search-input").value = '';
 });
-
-// =================================================================
-// Cities Array
-// =================================================================
-var cities = [];
 
 // =================================================================
 // Render Buttons Array
@@ -44,10 +56,6 @@ function renderButtons(cities) {
   }
 }
 
-for (var i = 0; i < cities.length; i++) {
-  cities.push(storedCities);
-  renderButtons(cities[i]);
-}
 
 // =================================================================
 // Click Function to get the buttons working to retrieve data
@@ -57,7 +65,6 @@ function cityHistory(event) {
   var clickedCity = clickedBtn.attr("data-city");
   getWeather(clickedCity);
 }
-
 $("#history").on("click", cityHistory);
 
 // =================================================================
@@ -103,7 +110,7 @@ function getWeather(city) {
     var div = $("<div>");
     var cardBody = $("<div>");
     div.addClass("card");
-    cardBody.addClass("card-body");
+    cardBody.addClass("card-body mainCard-style");
     var h1 = $("<h1>");
     var pTemp = $("<p>");
     var pHumidity = $("<p>");
@@ -111,22 +118,22 @@ function getWeather(city) {
     var mainImg = $("<img>");
     mainImg.attr("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png");
     h1.text(city + " " + date);
-    pTemp.text("Temp: " + temp + "C");
+    pTemp.text("Temp: " + temp + String.fromCharCode(176) + "C");
     pHumidity.text("Humidity: " + humidity + "%");
-    pWind.text("Wind Speed: " + wind + " KPH");
+    pWind.text("Wind: " + wind + " KPH");
 
     cardBody.append(h1);
     cardBody.append(mainImg);
     cardBody.append(pTemp);
-    cardBody.append(pHumidity);
     cardBody.append(pWind);
+    cardBody.append(pHumidity);
     div.append(cardBody);
     $("#today").append(div);
 
     // =================================================================
     // For loop to retrieve data for the next 5 days
     // =================================================================
-    for (var i = 15; i < response.list.length; i = i + 8) {
+    for (var i = 7; i < response.list.length; i = i + 8) {
       var temp1 = Math.floor(response.list[i].main.temp - 273.15);
       var date1 = response.list[i].dt_txt;
       var wind1 = response.list[i].wind.speed;
@@ -153,12 +160,12 @@ function getWeather(city) {
       // Append the data to the html
       // =================================================================
       pCardDate.text(moment(date1).format("DD/MM/YYYY"));
-      pCardTemp.text("Temp: " + temp1 + "C");
+      pCardTemp.text("Temp: " + temp1 + String.fromCharCode(176) + "C");
       pCardWind.text("Wind: " + wind1 + " KPH");
       pCardHumidity.text("Humidity: " + humidity1 + "%");
 
       card.addClass("card");
-      smallCardBody.addClass("card-body");
+      smallCardBody.addClass("card-body card-style");
 
       smallCardBody.append(pCardDate);
       smallCardBody.append(cardImg);
@@ -169,8 +176,7 @@ function getWeather(city) {
       card.append(smallCardBody);
 
       $("#forecast").append(card);
+      $("#cards").append('hello ');
     }
   });
 }
-
-
