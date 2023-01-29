@@ -2,10 +2,8 @@
 // Cities Array
 // =================================================================
 var storedCities = JSON.parse(localStorage.getItem("cities"));
-
 var cities = [];
 
-renderButtons(storedCities);
 // =================================================================
 // Click Function
 // =================================================================
@@ -41,14 +39,16 @@ $("#search-button").on("click", function (event) {
   $("search-input").value = "";
 });
 
+
+
 // =================================================================
 // Render Buttons Array
 // =================================================================
 function renderButtons(cities) {
-  for (var i = 0; i < cities.length; i++) {
+  for (city of cities) {
     var button = $("<button>");
-    button.text(cities[i]);
-    button.attr("data-city", cities[i]);
+    button.text(city);
+    button.attr("data-city", city);
     button.addClass("btn btn-secondary my-2");
     $("#history").append(button);
   }
