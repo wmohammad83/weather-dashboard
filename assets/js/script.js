@@ -3,9 +3,7 @@
 // =================================================================
 var storedCities = JSON.parse(localStorage.getItem("cities"));
 
-
 var cities = [];
-
 
 renderButtons(storedCities);
 // =================================================================
@@ -22,8 +20,8 @@ $("#search-button").on("click", function (event) {
   // =================================================================
   var city = $("#search-input").val();
 
-  if(city === ""){
-    return
+  if (city === "") {
+    return;
   }
 
   getWeather(city);
@@ -40,22 +38,21 @@ $("#search-button").on("click", function (event) {
   $("#history").empty();
   renderButtons(cities);
 
-  $("search-input").value = '';
+  $("search-input").value = "";
 });
 
 // =================================================================
 // Render Buttons Array
 // =================================================================
 function renderButtons(cities) {
-  for (city of cities) {
+  for (var i = 0; i < cities.length; i++) {
     var button = $("<button>");
-    button.text(city);
-    button.attr("data-city", city);
+    button.text(cities[i]);
+    button.attr("data-city", cities[i]);
     button.addClass("btn btn-secondary my-2");
     $("#history").append(button);
   }
 }
-
 
 // =================================================================
 // Click Function to get the buttons working to retrieve data
@@ -176,7 +173,7 @@ function getWeather(city) {
       card.append(smallCardBody);
 
       $("#forecast").append(card);
-      $("#cards").append('hello ');
+      $("#cards").append("hello ");
     }
   });
 }
