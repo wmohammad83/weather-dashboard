@@ -13,6 +13,8 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Weather Dashboard</title>
   </head>
 
@@ -44,7 +46,7 @@
                 <div class="input-group-append">
                   <button
                     type="submit"
-                    class="btn search-button"
+                    class="btn btn-primary search-button"
                     id="search-button"
                     aria-label="submit search"
                   >
@@ -70,7 +72,9 @@
             class="row mt-3"
             role="region"
             aria-live="polite"
-          ></section>
+          >
+            <div class="col" id="forecast-data"></div>
+          </section>
         </div>
       </div>
     </div>
