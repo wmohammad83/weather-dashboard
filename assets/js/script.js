@@ -177,3 +177,5 @@ function getWeather(city) {
     }
   });
 }
+
+renderButtons(storedCities)
