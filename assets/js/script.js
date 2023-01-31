@@ -2,7 +2,6 @@
 // Cities Array
 // =================================================================
 var storedCities = JSON.parse(localStorage.getItem("cities"));
-var cities = [];
 
 // =================================================================
 // Click Function
@@ -23,20 +22,20 @@ $("#search-button").on("click", function (event) {
   }
 
   getWeather(city);
-  cities.push(city);
+  storedCities.push(city);
 
   // =================================================================
   // Save button data to local storage
   // =================================================================
-  localStorage.setItem("cities", JSON.stringify(cities));
+  localStorage.setItem("cities", JSON.stringify(storedCities));
 
   // =================================================================
   // Clear history and re render the buttons onto the html
   // =================================================================
   $("#history").empty();
-  renderButtons(cities);
+  renderButtons(storedCities);
 
-  $("search-input").value = "";
+  $("#search-input").val("");
 });
 
 // =================================================================
